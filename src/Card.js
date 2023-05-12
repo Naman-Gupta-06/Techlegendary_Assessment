@@ -47,7 +47,9 @@ function Card() {
 
   const handleSearchQueryChange = (event) => {
     const { value } = event.target;
+    console.log(searchQuery)
     setSearchQuery(value);
+    
     setCurrentPage(1); // reset to first page
   };
 
@@ -62,8 +64,8 @@ function Card() {
 
   const filteredUsers = usersData.filter(
     (user) =>
-    user.first_name.toLowerCase().includes(searchQuery.toLowerCase()) &&
-    user.last_name.toLowerCase().includes(searchQuery.toLowerCase()) &&
+   ( user.first_name.toLowerCase().includes(searchQuery) ||
+    user.last_name.toLowerCase().includes(searchQuery)) &&
     (filters.domain === "" || user.email.toLowerCase().endsWith(filters.domain.toLowerCase())) &&
     (filters.gender === "" || user.gender.toLowerCase() === filters.gender.toLowerCase()) &&
     (filters.available === false || user.available === filters.available)
